@@ -39,4 +39,23 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ghcr.io/${{github.repository}}:${{ github.sha }}
+        
+  deploy:
+     runs-on: ubuntu-latest
+     needs: [build]
+    
+     steps:
+      - name: Checkout
+        uses: actions/checkout@v2       
+      - name: Set kubernetes secrets
+        uses: azure/k8s-set-context@v2
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+
+      - name: k8s deployment
+        run: |
+           kubectl apply -f kubernetes/api-ingress.yml
+           kubectl apply -f kubernetes/deployment.yml
+           kubectl apply -f kubernetes/service.yml
     
