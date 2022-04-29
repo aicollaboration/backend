@@ -33,7 +33,9 @@ app.get("/test", async function (req, res) {
     res.status(500).send();
   }
 });
-
+app.get("/test1", async function (req, res) {
+  res.send("Simply Hello World!");
+});
 app.get("/test2", async function (req, res) {
   const url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
   const config = {
