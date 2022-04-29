@@ -1,13 +1,16 @@
-FROM node:12.20-alpine
 
-WORKDIR /usr/src/app
+FROM node:7.7-alpine
 
-ADD package.json package.json 
-RUN npm install --build-from-resource
-COPY . .
+
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
 RUN npm run start
+
 
 FROM nginx:1.17.1-alpine
 RUN apk add --update alpine-sdk
-COPY node_modules /usr/src/app
+RUN mkdir -p /opt/hello-world-app && cp -a /tmp/node_modules /opt/hello-world-app
+WORKDIR /opt/hello-world-app
+COPY . /opt/hello-world-app
+
 
