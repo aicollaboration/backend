@@ -1,16 +1,16 @@
 FROM node:7.7-alpine
-MAINTAINER Jatin Shridhar <shridhar.jatin@gmail.com>
+MAINTAINER Jatin Shridhar <vishnuprasand@gmail.com>
 
 # install deps
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install
 
 # Copy deps
-RUN mkdir -p /opt/hello-world-app && cp -a /tmp/node_modules /opt/hello-world-app
+RUN mkdir -p /opt/express-middleware && cp -a /tmp/node_modules /opt/express-middleware
 
 # Setup workdir
-WORKDIR /opt/hello-world-app
-COPY . /opt/hello-world-app
+WORKDIR /opt/express-middleware
+COPY . /opt/express-middleware
 
 # run
 EXPOSE 3000

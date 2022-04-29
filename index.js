@@ -22,8 +22,6 @@ app.get("/test", async function (req, res) {
   try {
     const response = await axios(options);
 
-   
-
     const result = response.data;
     console.log(result,"response");
     res.send(result);
@@ -58,7 +56,7 @@ app.get("/test2", async function (req, res) {
   const config = {
     headers: {
       "Content-type": "application/json",
-      Authorization: `Bearer ${Cookies.get("jwt")}`,
+      Authorization: `Bearer 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`,
     },
   };
 
