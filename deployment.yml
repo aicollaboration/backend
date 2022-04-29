@@ -11,6 +11,6 @@ spec:
     spec:     # pod spec                  
       containers: 
       - name: express-middleware 
-        image: gcr.io/phineasrt/hello-world-image:v1 # image we pushed
+        image: gcr.io/phineasrt/express-middleware-image:v1 # image we pushed
         ports:
         - containerPort: 3000
