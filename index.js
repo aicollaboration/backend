@@ -14,7 +14,7 @@ app.get("/", function (req, res) {
 app.get("/test", async function (req, res) {
   const options ={
     method: 'get',
-    url: "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",
+    url: "http://api.nasa.gov/planetary/apod?api_key=DEMO_KEY",
     headers: {
         "Authorization": "auth"
     },
