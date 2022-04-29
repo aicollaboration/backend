@@ -1,9 +1,15 @@
+FROM node:16
 
-FROM node:14
-WORKDIR /usr/src/app
-COPY package*.json app.js ./
-RUN npm install
 EXPOSE 3000
-CMD ["node", "app.js"]
 
+WORKDIR /app
 
+RUN npm i npm@latest -g
+
+COPY package.json package-lock.json* ./
+
+RUN npm install --no-optional && npm cache clean --force
+
+COPY . .
+
+CMD ["node", "index.js"]
