@@ -13,7 +13,7 @@ WORKDIR /opt/express-middleware
 COPY . /opt/express-middleware
 
 # run
-
+EXPOSE 80
 CMD ["npm", "start"]
 
 
