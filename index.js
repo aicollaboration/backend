@@ -2,6 +2,12 @@ var express = require("express");
 var app = express();
 // const https = require('https');
 const axios = require("axios");
+const { createClient } = require('@supabase/supabase-js')
+
+const supabase = createClient(
+  'https://exrcpfgiopxnpdbziykr.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYxNDIwMjQ5NiwiZXhwIjoxOTI5Nzc4NDk2fQ.Z6awBtD8HNl_FWJposOdSLcU8oE2wErlHqiJR4jZKPE'
+);
 
 const GITAPI_KEY = "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";
 
@@ -57,6 +63,7 @@ app.get("/test2", async function (req, res) {
   }
 });
 
+
 app.get("/test3/:template/:owner/:name", async function (req, res) {
   const template = req.params.template || "test";
   const owner = req.params.owner || "test";
@@ -89,6 +96,9 @@ app.get("/test3/:template/:owner/:name", async function (req, res) {
   }
 });
 
+
+
+
 app.get("/createRepo/:template/:owner/:name", async function (req, res) {
   const template = req.params.template || "test";
   const owner = req.params.owner || "test";
@@ -111,6 +121,16 @@ app.get("/createRepo/:template/:owner/:name", async function (req, res) {
   try {
     const response = await axios.post(url, data, config);
     const result = response.data;
+
+    // this.loadingMessages.push('Store in database');
+    // const database = await this.solutionService.createSolution(solution);
+    // this.loadingMessages.push(`Stored in database`);
+
+
+    solution.author = this.supabase.auth.user().id;
+    const { data, error } = await this.supabase.from('solution').insert(solution);
+
+
     console.log(result, "response");
     // res.send(url+ 'data: ' + JSON.stringify(data));
 
