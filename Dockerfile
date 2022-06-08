@@ -3,7 +3,7 @@ MAINTAINER Jatin Shridhar <vishnuprasand@gmail.com>
 
 # install deps
 ADD package.json /tmp/package.json
-RUN cd /tmp && npm install
+RUN cd /tmp && npm install --build-from-resource
 
 # Copy deps
 RUN mkdir -p /opt/express-middleware && cp -a /tmp/node_modules /opt/express-middleware
