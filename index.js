@@ -41,9 +41,11 @@ app.get("/test", async function (req, res) {
     res.status(500).send();
   }
 });
+
 app.get("/test1", async function (req, res) {
   res.send("Simply Hello World!");
 });
+
 app.get("/test2", async function (req, res) {
   const url = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
   const config = {
@@ -66,11 +68,12 @@ app.get("/test2", async function (req, res) {
 });
 
 
-app.get("/test3/:template/:owner/:name", async function (req, res) {
-  const template = req.params.template || "test";
-  const owner = req.params.owner || "test";
-  const name = req.params.name || "test";
+app.get("/createRepoTest/:reponame", async function (req, res) {
+  const template = "aicollaboration/solution-app-template";
+  const owner = "vimalkovath";
+  const name = req.params.reponame ||"vimal";
 
+  console.log(owner,name,template)
   const url = `https://api.github.com/repos/${template}/generate`;
   const data = {
     owner,
@@ -85,14 +88,20 @@ app.get("/test3/:template/:owner/:name", async function (req, res) {
     },
   };
 
+  console.log(url)
+
+  https://api.github.com/repos/aicollaboration/solution-app-template/generate
+
+
+
   try {
     const response = await axios.post(url, data, config);
     const result = response.data;
     console.log(result, "response");
 
-    res.send(result);
+    res.send(result.data);
   } catch (err) {
-    console.log(err.response, "err");
+    console.log(err.response.data, "err");
     // logger.error('Http error', err);
     res.status(500).send();
   }
